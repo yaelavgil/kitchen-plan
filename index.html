@@ -205,8 +205,9 @@ function drawTall(){
         const t=el('text',{x:x+cw*S/2,y:y+19*S,class:'lbl'});t.textContent='מיקרו';svg.appendChild(t);
         cellG(svg,x,y+38*S+2,cw*S-2,(rh-38)*S-4,'tall-4-pull','מדף נשלף','מתחת למיקרו · נשלף');
       } else {
-        const names={top:'תא עליון',mid:ci===0?'נישת הקפה':'תא אמצעי',drw:'מגירות'};
-        const subs={top:`גובה 80.4 ס״מ · מדף אחד`,mid:'גובה 56 ס״מ',drw:'גובה 75.5 ס״מ · מגירה פנימית + 2 גבוהות'};
+        const names={top:'תא עליון',mid:ci===0?'נישת הקפה':'תא אמצעי',app:'תא גבוה',drw:'מגירות'};
+        const subs={top:'גובה 80.4 ס״מ · מדף אחד',mid:ci===0?'מדף עומק 30 · לד עם מפסק':'גובה 56 ס״מ',
+                    app:'גובה 59 ס״מ · לצד התנור',drw:'גובה 75.5 ס״מ · מגירה פנימית + 2 גבוהות'};
         cellG(svg,x,y,cw*S-2,rh*S-2,id,names[kind],subs[kind]);
       }
       y+=rh*S;
