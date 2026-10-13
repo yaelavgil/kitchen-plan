@@ -275,7 +275,7 @@ function drawTall(){
   svg.appendChild(el('rect',{x:OX,y:yOf(TOT),width:2955*S,height:PANEL*S,fill:'#30384a',stroke:'#1b1b1b'}));
   txt(svg,OX+2955*S/2,yOf(TOT)+PANEL*S/2+4,'פאנל שלייפלאק למיזוג + חירוץ לאיוורור','applbl');
   let x=OX+35*S;
-  const yTop=yOf(TOT-PANEL-TOP), yMid=yOf(TOE+DRW+MID), yDrw=yOf(TOE+DRW);
+  const yTop=yOf(TOT-PANEL), yMid=yOf(TOE+DRW+MID), yDrw=yOf(TOE+DRW);
   cols.forEach(function(cw,ci){
     const w=cw*S-3, n=ci+1;
     const nTop=ci===0?3:2, th=TOP/nTop;
