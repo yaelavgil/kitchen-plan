@@ -224,9 +224,12 @@ function drawTall(){
     x+=cw*S;
   });
   const fx=OX+4*49.6*S+6;
-  svg.appendChild(el('rect',{x:fx,y:OY,width:97*S,height:191.5*S,class:'app'}));
-  const ft=el('text',{x:fx+97*S/2,y:OY+95*S,class:'lbl'});ft.textContent='מקרר';svg.appendChild(ft);
-  const ft2=el('text',{x:fx+97*S/2,y:OY+95*S+12,class:'lbl sm'});ft2.textContent='הייסנס RQ760';svg.appendChild(ft2);
+  cellG(svg,fx,OY,97*S,80.4*S-2,'tall-5-top','קלאפה מעל המקרר',
+        'רוחב 97 · גובה 80.4 ס״מ · ממשיכה את התא העליון');
+  const fy=OY+80.4*S, fh=190.5*S;
+  svg.appendChild(el('rect',{x:fx,y:fy,width:97*S,height:fh,class:'app'}));
+  const ft=el('text',{x:fx+97*S/2,y:fy+fh/2,class:'lbl'});ft.textContent='מקרר LG';svg.appendChild(ft);
+  const ft2=el('text',{x:fx+97*S/2,y:fy+fh/2+12,class:'lbl sm'});ft2.textContent='נישה 97 רוחב · 190.5 גובה';svg.appendChild(ft2);
   dimText(svg,OX+4*49.6*S/2,OY+271*S+2,'198.5');
   dimText(svg,fx+97*S/2,OY+271*S+2,'97');
 }
