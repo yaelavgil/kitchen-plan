@@ -34,21 +34,24 @@
   --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45);}
 *{box-sizing:border-box;margin:0}
 body{background:var(--bg);color:var(--ink);font:400 16px/1.55 Heebo,-apple-system,sans-serif}
-.wrap{max-width:1000px;margin:0 auto;padding:22px 14px 90px}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 14px 90px}
 .eyebrow{font-size:12.5px;color:var(--ink3);margin-bottom:6px}
 h1{font-family:"Frank Ruhl Libre",serif;font-weight:700;font-size:29px;line-height:1.15}
 .sub{color:var(--ink2);font-size:14.5px;margin-top:8px;max-width:60ch}
 h2{font-family:"Frank Ruhl Libre",serif;font-size:22px;font-weight:700;margin:34px 0 2px}
 .dims{font-size:13px;color:var(--ink3);margin-bottom:12px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:var(--shadow);overflow-x:auto}
-svg{display:block;width:100%;height:auto;min-width:480px}
+svg{display:block;width:100%;height:auto}
+#svg-island{min-width:1100px}
+#svg-sink{min-width:620px}
+#svg-tall{min-width:860px}
 .cell{cursor:pointer}
 .cell rect.b{fill:var(--blue);stroke:#1b1b1b;stroke-width:1.2;transition:fill .15s}
 .cell:hover rect.b{fill:var(--blue2)}
 .cell rect.b.filled{fill:#6c8299}
 .hdl{stroke:#c9b98f;stroke-width:3;stroke-linecap:round}
-.lbl{font:500 11px Heebo,sans-serif;fill:#fff;text-anchor:middle;pointer-events:none}
-.lbl.sm{font-size:9.5px;font-weight:400;fill:#e8e2d6}
+.lbl{font:500 12px Heebo,sans-serif;fill:#fff;text-anchor:middle;pointer-events:none}
+.lbl.sm{font-size:10px;font-weight:400;fill:#e9e3d7}
 .dim{font:400 9px Heebo,sans-serif;fill:var(--ink3);text-anchor:middle}
 .wall{fill:none;stroke:var(--ink3);stroke-width:1}
 .app{fill:#2a2a2a;stroke:#111;stroke-width:1.2}
@@ -95,21 +98,21 @@ textarea.now{min-height:72px}
 <h2>האי</h2>
 <p class="dims">רוחב כולל 309.9 · שלוש יחידות 82 · 85 · 82 · גובה 91 · תשע מגירות</p>
 <div class="card">
-<svg viewBox="0 0 660 230" id="svg-island"></svg>
+<svg viewBox="0 0 1130 390" id="svg-island"></svg>
 <div class="sheet-title"><span><b>חזית האי</b> · גיליון 10925/6</span><span>מידות בס״מ</span></div>
 </div>
 
 <h2>חזית הכיור</h2>
 <p class="dims">רוחב 115 · שתי דלתות 54 · גובה 91 · מדפים פנימיים · לצד העמוד</p>
 <div class="card">
-<svg viewBox="0 0 660 230" id="svg-sink"></svg>
+<svg viewBox="0 0 640 350" id="svg-sink"></svg>
 <div class="sheet-title"><span><b>חזית הכיור</b> · גיליון 10925/5</span><span>מידות בס״מ</span></div>
 </div>
 
 <h2>הארונות הגבוהים</h2>
 <p class="dims">רוחב 198.5 + נישת מקרר 97 · גובה 263 · תנור BOSCH HBG774 · מיקרו BFL520MB0</p>
 <div class="card">
-<svg viewBox="0 0 660 430" id="svg-tall"></svg>
+<svg viewBox="0 0 880 790" id="svg-tall"></svg>
 <div class="sheet-title"><span><b>קיר הבילד-אין</b> · גיליון 10925/2</span><span>מידות בס״מ</span></div>
 </div>
 
@@ -151,9 +154,12 @@ function cellG(svg,x,y,w,h,id,title,sub){
   const g=el('g',{class:'cell'}); g.dataset.id=id; g.dataset.title=title;
   const r=el('rect',{x,y,width:w,height:h,rx:2,class:'b'}); r.dataset.id=id;
   g.appendChild(r);
-  g.appendChild(el('line',{x1:x+w/2-11,y1:y+5.5,x2:x+w/2+11,y2:y+5.5,class:'hdl'}));
-  const t=el('text',{x:x+w/2,y:y+h/2+1,class:'lbl'}); t.textContent=title; g.appendChild(t);
-  const s=el('text',{x:x+w/2,y:y+h/2+12,class:'lbl sm'}); s.dataset.body=id; g.appendChild(s);
+  g.appendChild(el('line',{x1:x+w/2-13,y1:y+6,x2:x+w/2+13,y2:y+6,class:'hdl'}));
+  const t=el('text',{x:x+w/2,y:y+20,class:'lbl'}); t.textContent=title; g.appendChild(t);
+  const s=el('text',{x:x+w/2,y:y+34,class:'lbl sm'}); s.dataset.body=id;
+  s.dataset.x=x+w/2; s.dataset.y0=y+34; s.dataset.w=w-10;
+  s.dataset.max=Math.max(1,Math.floor((h-26)/12));
+  g.appendChild(s);
   g.onclick=()=>openCell(id,title,sub);
   svg.appendChild(g); return g;
 }
@@ -161,7 +167,7 @@ function dimText(svg,x,y,txt){const t=el('text',{x,y,class:'dim'});t.textContent
 
 function drawIsland(){
   const svg=document.getElementById('svg-island'); svg.innerHTML='';
-  const S=1.9, OX=25, OY=22;
+  const S=3.4, OX=34, OY=26;
   const W=ISLAND.w*S, H=ISLAND.h*S;
   svg.appendChild(el('rect',{x:OX-4,y:OY-7,width:W+8,height:6,class:'cnt'}));
   let x=OX;
@@ -177,17 +183,17 @@ function drawIsland(){
     x+=uw*S;
   });
   dimText(svg,OX+W/2,OY+H+30,'309.9 — רוחב כולל');
-  [15,30,32].forEach((v,i)=>{const yy=OY+(i===0?7.5:i===1?15+15:15+30+16)*S;dimText(svg,OX-13,yy,v+'');});
+  [15,30,32].forEach((v,i)=>{const yy=OY+(i===0?7.5:i===1?15+15:15+30+16)*S;dimText(svg,OX-18,yy,v+'');});
   svg.appendChild(el('rect',{x:OX,y:OY+H,width:W,height:ISLAND.toe*S*0.5,fill:'#2b2b2b'}));
 }
 
 function drawSink(){
   const svg=document.getElementById('svg-sink'); svg.innerHTML='';
-  const S=1.9, OX=150, OY=22;
+  const S=3.4, OX=120, OY=26;
   const W=SINK.w*S, H=(SINK.h-SINK.toe)*S;
   svg.appendChild(el('rect',{x:OX-4,y:OY-7,width:W+8,height:6,class:'cnt'}));
-  svg.appendChild(el('line',{x1:OX-34,y1:OY-14,x2:OX-34,y2:OY+H+24,class:'wall'}));
-  const pt=el('text',{x:OX-48,y:OY+H/2,class:'dim'});pt.textContent='עמוד';svg.appendChild(pt);
+  svg.appendChild(el('line',{x1:OX-40,y1:OY-16,x2:OX-40,y2:OY+H+26,class:'wall'}));
+  const pt=el('text',{x:OX-56,y:OY+H/2,class:'dim'});pt.textContent='עמוד';svg.appendChild(pt);
   let x=OX;
   SINK.doors.forEach((dw,i)=>{
     cellG(svg,x,OY,dw*S-2,H,'sink-'+(i+1),'ארון '+(i+1),`דלת ${dw} ס״מ · מדפים פנימיים · גובה ${SINK.h-SINK.toe} ס״מ`);
@@ -200,7 +206,7 @@ function drawSink(){
 
 function drawTall(){
   const svg=document.getElementById('svg-tall'); svg.innerHTML='';
-  const S=1.42, OX=22, OY=18;
+  const S=2.6, OX=30, OY=24;
   const colW=[49.6,49.6,49.6,49.6];
   const rows=[['top',80.4],['mid',56],['app',59],['drw',75.5]];
   let x=OX;
@@ -286,10 +292,30 @@ function save(id,now,body){
 function toast(m){const s=document.getElementById('status');s.textContent=m;s.classList.add('on');
   clearTimeout(s._t);s._t=setTimeout(()=>s.classList.remove('on'),1800);}
 let VIEW='now';
+function wrapInto(t,txt,w,x,y0,max){
+  while(t.firstChild)t.removeChild(t.firstChild);
+  if(!txt)return;
+  const cpl=Math.max(8,Math.floor(w/5));
+  const words=txt.split(/\s+/); const lines=[]; let cur='';
+  for(const wd of words){
+    if(!cur){cur=wd;}
+    else if((cur+' '+wd).length<=cpl){cur+=' '+wd;}
+    else{lines.push(cur);cur=wd; if(lines.length>=max)break;}
+  }
+  if(cur&&lines.length<max)lines.push(cur);
+  const used=lines.join(' ').length;
+  if(used<txt.replace(/\s+/g,' ').length&&lines.length)
+    lines[lines.length-1]=lines[lines.length-1].slice(0,Math.max(3,cpl-1))+'…';
+  lines.forEach((ln,i)=>{
+    const ts=document.createElementNS('http://www.w3.org/2000/svg','tspan');
+    ts.setAttribute('x',x); ts.setAttribute('y',y0+i*12); ts.textContent=ln;
+    t.appendChild(ts);
+  });
+}
 function render(){
   document.querySelectorAll('text[data-body]').forEach(t=>{
     const v=data[t.dataset.body]; const txt=(v&&v[VIEW])||'';
-    t.textContent=txt.length>26?txt.slice(0,25)+'…':txt;
+    wrapInto(t,txt,+t.dataset.w,+t.dataset.x,+t.dataset.y0,+t.dataset.max);
     const g=t.closest('.cell'); if(g){const r=g.querySelector('rect.b');
       if(r) r.classList.toggle('filled',!!txt);}
   });
