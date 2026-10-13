@@ -78,6 +78,10 @@ button.pri{background:var(--accent);color:#fff;border-color:transparent}
 .toggle{display:inline-flex;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:3px;gap:3px;margin:14px 0 4px}
 .toggle button{border:none;background:transparent;padding:7px 15px;border-radius:999px;font-size:13.5px;color:var(--ink2)}
 .toggle button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.zoom{display:flex;align-items:center;gap:4px;padding:0 4px 8px}
+.zoom button{padding:5px 11px;font-size:14px;border-radius:8px;line-height:1}
+.zoom span{font-size:12.5px;color:var(--ink3);min-width:46px;text-align:center}
+.zoom .sp{flex:1}
 .fl{font-size:12.5px;color:var(--ink3);margin:12px 0 5px}
 textarea.now{min-height:72px}
 .foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink3);line-height:1.8}
@@ -98,6 +102,9 @@ textarea.now{min-height:72px}
 <h2>האי</h2>
 <p class="dims">רוחב כולל 309.9 · שלוש יחידות 82 · 85 · 82 · גובה 91 · תשע מגירות</p>
 <div class="card">
+<div class="zoom" data-for="svg-island"><button data-z="out">−</button><span>100%</span><button data-z="in">+</button><button data-z="fit">התאם לרוחב</button><span class="sp"></span></div>
+<div class="zoom" data-for="svg-sink"><button data-z="out">−</button><span>100%</span><button data-z="in">+</button><button data-z="fit">התאם לרוחב</button><span class="sp"></span></div>
+<div class="zoom" data-for="svg-tall"><button data-z="out">−</button><span>100%</span><button data-z="in">+</button><button data-z="fit">התאם לרוחב</button><span class="sp"></span></div>
 <svg viewBox="0 0 1130 390" id="svg-island"></svg>
 <div class="sheet-title"><span><b>חזית האי</b> · גיליון 10925/6</span><span>מידות בס״מ</span></div>
 </div>
@@ -323,6 +330,21 @@ function render(){
 function load(){
   fetch(NODE+'.json').then(r=>r.json()).then(d=>{data=d||{};render();}).catch(()=>{});
 }
+const ZB={},ZV={};
+function zoom(id,v){
+  const svg=document.getElementById(id), card=svg.parentElement;
+  if(!ZB[id]) ZB[id]=svg.getBoundingClientRect().width||card.clientWidth;
+  const fit=(card.clientWidth-26)/ZB[id];
+  let z=ZV[id]===undefined?1:ZV[id];
+  if(v==='in')z=Math.min(3,z+0.25); else if(v==='out')z=Math.max(0.3,z-0.25); else z=fit;
+  ZV[id]=z;
+  svg.style.minWidth='0'; svg.style.width=Math.round(ZB[id]*z)+'px';
+  const c=document.querySelector('.zoom[data-for="'+id+'"] span');
+  if(c)c.textContent=Math.round(z*100)+'%';
+}
+document.querySelectorAll('.zoom').forEach(z=>{
+  z.onclick=e=>{const b=e.target.closest('button'); if(b)zoom(z.dataset.for,b.dataset.z);};
+});
 document.getElementById('toggle').onclick=e=>{
   const b=e.target.closest('button'); if(!b)return;
   VIEW=b.dataset.v;
