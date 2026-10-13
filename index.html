@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>מה יושב איפה — המטבח</title>
+<meta name="description" content="שלוש חזיתות המטבח לפי תוכניות הביצוע. נוגעים בכל מגירה וקובעים מה יושב בה.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="אשל 57">
+<meta property="og:locale" content="he_IL">
+<meta property="og:title" content="מה יושב איפה — המטבח · אשל 57">
+<meta property="og:description" content="האי, הכיור והארונות הגבוהים. נוגעים בתא וקובעים מה נכנס.">
+<meta property="og:url" content="https://yaelavgil.github.io/kitchen-plan/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%8D%B3%3C/text%3E%3C/svg%3E">
+<meta name="theme-color" content="#f4f2ee" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#16150f" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@500;700&family=Heebo:wght@300;400;500;700&display=swap">
+<style>
+:root{
+  --bg:#f4f2ee; --surface:#fffefb; --surface2:#ebe7df; --line:#dcd6cb; --line2:#c2baac;
+  --ink:#24211c; --ink2:#665e53; --ink3:#968d80;
+  --blue:#3f5068; --blue2:#55688a; --accent:#8a5a2b;
+  --shadow:0 1px 2px rgba(40,34,26,.05),0 8px 22px rgba(40,34,26,.06);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#16150f; --surface:#1f1d16; --surface2:#28251c; --line:#342f25; --line2:#4a4436;
+  --ink:#efe9dd; --ink2:#a99f8f; --ink3:#7d7466; --accent:#d9a066;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45);}}
+:root[data-theme="dark"]{
+  --bg:#16150f; --surface:#1f1d16; --surface2:#28251c; --line:#342f25; --line2:#4a4436;
+  --ink:#efe9dd; --ink2:#a99f8f; --ink3:#7d7466; --accent:#d9a066;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.45);}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.55 Heebo,-apple-system,sans-serif}
+.wrap{max-width:1000px;margin:0 auto;padding:22px 14px 90px}
+.eyebrow{font-size:12.5px;color:var(--ink3);margin-bottom:6px}
+h1{font-family:"Frank Ruhl Libre",serif;font-weight:700;font-size:29px;line-height:1.15}
+.sub{color:var(--ink2);font-size:14.5px;margin-top:8px;max-width:60ch}
+h2{font-family:"Frank Ruhl Libre",serif;font-size:22px;font-weight:700;margin:34px 0 2px}
+.dims{font-size:13px;color:var(--ink3);margin-bottom:12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:var(--shadow);overflow-x:auto}
+svg{display:block;width:100%;height:auto;min-width:480px}
+.cell{cursor:pointer}
+.cell rect.b{fill:var(--blue);stroke:#1b1b1b;stroke-width:1.2;transition:fill .15s}
+.cell:hover rect.b{fill:var(--blue2)}
+.cell rect.b.filled{fill:#6c8299}
+.hdl{stroke:#c9b98f;stroke-width:3;stroke-linecap:round}
+.lbl{font:500 11px Heebo,sans-serif;fill:#fff;text-anchor:middle;pointer-events:none}
+.lbl.sm{font-size:9.5px;font-weight:400;fill:#e8e2d6}
+.dim{font:400 9px Heebo,sans-serif;fill:var(--ink3);text-anchor:middle}
+.wall{fill:none;stroke:var(--ink3);stroke-width:1}
+.app{fill:#2a2a2a;stroke:#111;stroke-width:1.2}
+.cnt{fill:#efece6;stroke:#9c958a;stroke-width:1}
+.sheet-title{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:12.5px;color:var(--ink3);padding:0 4px 8px}
+dialog{border:none;border-radius:16px;padding:0;background:var(--surface);color:var(--ink);max-width:420px;width:92vw;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(0,0,0,.45)}
+.dlg{padding:18px}
+.dlg h3{font-size:18px;margin-bottom:2px}
+.dlg .meta{font-size:13px;color:var(--ink3);margin-bottom:14px}
+textarea{width:100%;min-height:96px;font:400 15px/1.5 Heebo,sans-serif;padding:11px;
+  border:1px solid var(--line2);border-radius:10px;background:var(--bg);color:var(--ink);resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
+.chip{background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-size:12.5px;color:var(--ink2);cursor:pointer}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.row{display:flex;gap:8px;justify-content:flex-end}
+button{font:500 15px Heebo,sans-serif;padding:10px 18px;border-radius:10px;border:1px solid var(--line2);
+  background:var(--surface2);color:var(--ink);cursor:pointer}
+button.pri{background:var(--accent);color:#fff;border-color:transparent}
+.status{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);background:var(--surface);
+  border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:13px;color:var(--ink2);
+  box-shadow:var(--shadow);opacity:0;transition:opacity .25s;pointer-events:none}
+.status.on{opacity:1}
+.foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink3);line-height:1.8}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<p class="eyebrow">אשל 57 · מטבח · לפי אישור תקן 10925 (12.08.26)</p>
+<h1>מה יושב איפה</h1>
+<p class="sub">שלוש החזיתות במידות האמיתיות מתוכניות הביצוע. נוגעים בכל מגירה או ארון, כותבים מה נכנס לשם, וזה נשמר לכולם.</p>
+
+<h2>האי</h2>
+<p class="dims">רוחב כולל 309.9 · שלוש יחידות 82 · 85 · 82 · גובה 91 · תשע מגירות</p>
+<div class="card">
+<svg viewBox="0 0 660 230" id="svg-island"></svg>
+<div class="sheet-title"><span><b>חזית האי</b> · גיליון 10925/6</span><span>מידות בס״מ</span></div>
+</div>
+
+<h2>חזית הכיור</h2>
+<p class="dims">רוחב 115 · שתי דלתות 54 · גובה 91 · מדפים פנימיים · לצד העמוד</p>
+<div class="card">
+<svg viewBox="0 0 660 230" id="svg-sink"></svg>
+<div class="sheet-title"><span><b>חזית הכיור</b> · גיליון 10925/5</span><span>מידות בס״מ</span></div>
+</div>
+
+<h2>הארונות הגבוהים</h2>
+<p class="dims">רוחב 198.5 + נישת מקרר 97 · גובה 263 · תנור BOSCH HBG774 · מיקרו BFL520MB0</p>
+<div class="card">
+<svg viewBox="0 0 660 430" id="svg-tall"></svg>
+<div class="sheet-title"><span><b>קיר הבילד-אין</b> · גיליון 10925/2</span><span>מידות בס״מ</span></div>
+</div>
+
+<p class="foot">
+המידות נלקחו מתוכניות הביצוע של פורמג׳ו, אישור תקן 10925 מ-12.08.26, והומרו ממילימטרים לסנטימטרים.<br>
+הגוון בשרטוט הוא האינדיגו שבוצע בפועל. מה שנכתב כאן נשמר מיד ונראה לכולם.
+</p>
+
+</div>
+
+<dialog id="dlg"><form method="dialog" class="dlg">
+  <h3 id="dlg-title">תא</h3>
+  <p class="meta" id="dlg-meta"></p>
+  <textarea id="dlg-text" placeholder="מה יושב כאן?"></textarea>
+  <div class="chips" id="dlg-chips"></div>
+  <div class="row">
+    <button value="cancel">ביטול</button>
+    <button value="save" class="pri">שמירה</button>
+  </div>
+</form></dialog>
+<div class="status" id="status"></div>
+
+<script>
+const DB='https://home-picks-47450-default-rtdb.europe-west1.firebasedatabase.app';
+const NODE=DB+'/kitchen/cells';
+let data={};
+
+const ISLAND={w:309.9,h:91,toe:12.5,units:[82,85,82],rows:[15,30,32],gap:1.8};
+const SINK={w:115,h:91,toe:12.5,doors:[54,54]};
+const TALL={w:198.5,fridge:97,h:263};
+
+function el(t,a){const e=document.createElementNS('http://www.w3.org/2000/svg',t);
+  for(const k in a)e.setAttribute(k,a[k]);return e;}
+
+function cellG(svg,x,y,w,h,id,title,sub){
+  const g=el('g',{class:'cell'}); g.dataset.id=id; g.dataset.title=title;
+  const r=el('rect',{x,y,width:w,height:h,rx:2,class:'b'}); r.dataset.id=id;
+  g.appendChild(r);
+  g.appendChild(el('line',{x1:x+w/2-11,y1:y+5.5,x2:x+w/2+11,y2:y+5.5,class:'hdl'}));
+  const t=el('text',{x:x+w/2,y:y+h/2+1,class:'lbl'}); t.textContent=title; g.appendChild(t);
+  const s=el('text',{x:x+w/2,y:y+h/2+12,class:'lbl sm'}); s.dataset.body=id; g.appendChild(s);
+  g.onclick=()=>openCell(id,title,sub);
+  svg.appendChild(g); return g;
+}
+function dimText(svg,x,y,txt){const t=el('text',{x,y,class:'dim'});t.textContent=txt;svg.appendChild(t);}
+
+function drawIsland(){
+  const svg=document.getElementById('svg-island'); svg.innerHTML='';
+  const S=1.9, OX=25, OY=22;
+  const W=ISLAND.w*S, H=ISLAND.h*S;
+  svg.appendChild(el('rect',{x:OX-4,y:OY-7,width:W+8,height:6,class:'cnt'}));
+  let x=OX;
+  ISLAND.units.forEach((uw,ui)=>{
+    let y=OY;
+    ISLAND.rows.forEach((rh,ri)=>{
+      const id='island-'+(ui+1)+'-'+(ri+1);
+      const names=[['מגירה עליונה','מגירה + סכו״ם','מגירה עליונה'],['מגירה אמצעית','מגירה אמצעית','מגירה אמצעית'],['מגירה תחתונה','מגירה תחתונה','מגירה תחתונה']];
+      cellG(svg,x,y,uw*S-2,rh*S-2,id,names[ri][ui],`יחידה ${ui+1} · ${uw} ס״מ רוחב · ${rh} ס״מ גובה`);
+      y+=rh*S;
+    });
+    dimText(svg,x+uw*S/2,OY+H+14,uw+'');
+    x+=uw*S;
+  });
+  dimText(svg,OX+W/2,OY+H+30,'309.9 — רוחב כולל');
+  [15,30,32].forEach((v,i)=>{const yy=OY+(i===0?7.5:i===1?15+15:15+30+16)*S;dimText(svg,OX-13,yy,v+'');});
+  svg.appendChild(el('rect',{x:OX,y:OY+H,width:W,height:ISLAND.toe*S*0.5,fill:'#2b2b2b'}));
+}
+
+function drawSink(){
+  const svg=document.getElementById('svg-sink'); svg.innerHTML='';
+  const S=1.9, OX=150, OY=22;
+  const W=SINK.w*S, H=(SINK.h-SINK.toe)*S;
+  svg.appendChild(el('rect',{x:OX-4,y:OY-7,width:W+8,height:6,class:'cnt'}));
+  svg.appendChild(el('line',{x1:OX-34,y1:OY-14,x2:OX-34,y2:OY+H+24,class:'wall'}));
+  const pt=el('text',{x:OX-48,y:OY+H/2,class:'dim'});pt.textContent='עמוד';svg.appendChild(pt);
+  let x=OX;
+  SINK.doors.forEach((dw,i)=>{
+    cellG(svg,x,OY,dw*S-2,H,'sink-'+(i+1),'ארון '+(i+1),`דלת ${dw} ס״מ · מדפים פנימיים · גובה ${SINK.h-SINK.toe} ס״מ`);
+    dimText(svg,x+dw*S/2,OY+H+14,dw+'');
+    x+=dw*S;
+  });
+  dimText(svg,OX+W/2,OY+H+30,'115 — רוחב כולל');
+  svg.appendChild(el('rect',{x:OX,y:OY+H,width:W,height:SINK.toe*S*0.5,fill:'#2b2b2b'}));
+}
+
+function drawTall(){
+  const svg=document.getElementById('svg-tall'); svg.innerHTML='';
+  const S=1.42, OX=22, OY=18;
+  const colW=[49.6,49.6,49.6,49.6];
+  const rows=[['top',80.4],['mid',56],['app',59],['drw',75.5]];
+  let x=OX;
+  colW.forEach((cw,ci)=>{
+    let y=OY;
+    rows.forEach(([kind,rh])=>{
+      const id='tall-'+(ci+1)+'-'+kind;
+      if(kind==='app'&&ci===1){
+        svg.appendChild(el('rect',{x,y,width:cw*S*2-2,height:rh*S-2,class:'app'}));
+        const t=el('text',{x:x+cw*S-1,y:y+rh*S/2,class:'lbl'});t.textContent='תנור';svg.appendChild(t);
+        const t2=el('text',{x:x+cw*S-1,y:y+rh*S/2+12,class:'lbl sm'});t2.textContent='BOSCH HBG774';svg.appendChild(t2);
+      } else if(kind==='app'&&ci===2){ /* skip, merged */ }
+      else if(kind==='app'&&ci===3){
+        svg.appendChild(el('rect',{x,y,width:cw*S-2,height:38*S,class:'app'}));
+        const t=el('text',{x:x+cw*S/2,y:y+19*S,class:'lbl'});t.textContent='מיקרו';svg.appendChild(t);
+        cellG(svg,x,y+38*S+2,cw*S-2,(rh-38)*S-4,'tall-4-pull','מדף נשלף','מתחת למיקרו · נשלף');
+      } else {
+        const names={top:'תא עליון',mid:ci===0?'נישת הקפה':'תא אמצעי',drw:'מגירות'};
+        const subs={top:`גובה 80.4 ס״מ · מדף אחד`,mid:'גובה 56 ס״מ',drw:'גובה 75.5 ס״מ · מגירה פנימית + 2 גבוהות'};
+        cellG(svg,x,y,cw*S-2,rh*S-2,id,names[kind],subs[kind]);
+      }
+      y+=rh*S;
+    });
+    x+=cw*S;
+  });
+  const fx=OX+4*49.6*S+6;
+  svg.appendChild(el('rect',{x:fx,y:OY,width:97*S,height:191.5*S,class:'app'}));
+  const ft=el('text',{x:fx+97*S/2,y:OY+95*S,class:'lbl'});ft.textContent='מקרר';svg.appendChild(ft);
+  const ft2=el('text',{x:fx+97*S/2,y:OY+95*S+12,class:'lbl sm'});ft2.textContent='הייסנס RQ760';svg.appendChild(ft2);
+  dimText(svg,OX+4*49.6*S/2,OY+271*S+2,'198.5');
+  dimText(svg,fx+97*S/2,OY+271*S+2,'97');
+}
+
+const SUGGEST={
+  island:['סירים וכלי בישול','מכסים','סכו״ם','כלי הגשה','קופסאות אחסון','תבלינים','מגבות וסינרים','כלי אפייה'],
+  sink:['חומרי ניקוי','שקיות אשפה','מסננים וקערות','כלי ניקיון','פח מיון'],
+  tall:['מלאי יבש','כלי אפייה','תבניות בעמידה','ספלים','קפה ותה','חטיפים','צלחות','עונתי']
+};
+function openCell(id,title,sub){
+  const d=document.getElementById('dlg');
+  document.getElementById('dlg-title').textContent=title;
+  document.getElementById('dlg-meta').textContent=sub||'';
+  const ta=document.getElementById('dlg-text');
+  ta.value=(data[id]&&data[id].body)||'';
+  const box=document.getElementById('dlg-chips'); box.innerHTML='';
+  const fam=id.split('-')[0];
+  (SUGGEST[fam]||[]).forEach(s=>{
+    const c=document.createElement('span'); c.className='chip'; c.textContent=s;
+    c.onclick=()=>{ta.value=ta.value?ta.value+' · '+s:s;};
+    box.appendChild(c);
+  });
+  d.returnValue='';
+  d.onclose=()=>{ if(d.returnValue==='save') save(id,ta.value.trim()); };
+  d.showModal();
+}
+function save(id,body){
+  data[id]=Object.assign({},data[id],{body,at:Date.now()});
+  render();
+  fetch(NODE+'/'+id+'.json',{method:'PATCH',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({body,at:Date.now()})})
+    .then(()=>toast('נשמר')).catch(()=>toast('נשמר מקומית — אין חיבור'));
+}
+function toast(m){const s=document.getElementById('status');s.textContent=m;s.classList.add('on');
+  clearTimeout(s._t);s._t=setTimeout(()=>s.classList.remove('on'),1800);}
+function render(){
+  document.querySelectorAll('text[data-body]').forEach(t=>{
+    const v=data[t.dataset.body]; const txt=(v&&v.body)||'';
+    t.textContent=txt.length>26?txt.slice(0,25)+'…':txt;
+    const g=t.closest('.cell'); if(g){const r=g.querySelector('rect.b');
+      if(r) r.classList.toggle('filled',!!txt);}
+  });
+}
+function load(){
+  fetch(NODE+'.json').then(r=>r.json()).then(d=>{data=d||{};render();}).catch(()=>{});
+}
+drawIsland(); drawSink(); drawTall(); load();
+setInterval(load,6000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)load();});
+</script>
+</body>
+</html>
