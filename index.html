@@ -51,7 +51,14 @@ svg{display:block;width:100%;height:auto}
 .cell rect.b.filled{fill:#6c8299}
 .hdl{stroke:#c9b98f;stroke-width:3;stroke-linecap:round}
 .lbl{font:500 12px Heebo,sans-serif;fill:#fff;text-anchor:middle;pointer-events:none}
-.lbl.sm{font-size:10px;font-weight:400;fill:#e9e3d7}
+.lbl.sm{font-size:10px;font-weight:400;fill:#e9e3d7;text-anchor:start}
+.pen{font-size:12px;fill:rgba(255,255,255,.5);cursor:pointer}
+.cell:hover .pen{fill:rgba(255,255,255,.95)}
+.pend rect{fill:#c8912f}
+.pend text{font:600 9.5px Heebo,sans-serif;fill:#fff;text-anchor:middle;pointer-events:none}
+.pend{cursor:pointer}
+.pend:hover rect{fill:#e0a53c}
+.cell rect.b.pending{stroke:#c8912f;stroke-width:2}
 .dim{font:400 9px Heebo,sans-serif;fill:var(--ink3);text-anchor:middle}
 .wall{fill:none;stroke:var(--ink3);stroke-width:1}
 .app{fill:#2a2a2a;stroke:#111;stroke-width:1.2}
@@ -92,7 +99,7 @@ textarea.now{min-height:72px}
 
 <p class="eyebrow">אשל 57 · מטבח · לפי אישור תקן 10925 (12.08.26)</p>
 <h1>מה יושב איפה</h1>
-<p class="sub">שלוש החזיתות במידות האמיתיות מתוכניות הביצוע. נוגעים בכל מגירה או ארון, כותבים מה נכנס לשם, וזה נשמר לכולם.</p>
+<p class="sub">שלוש החזיתות במידות האמיתיות מתוכניות הביצוע. נוגעים ב-✎ בכל מגירה כדי לערוך, ומסמנים ✓ לאשר על מה שעוד לא אומת. הכל נשמר לכולם מיד.</p>
 
 <div class="toggle" id="toggle">
   <button data-v="now" class="on">מה יש שם עכשיו</button>
@@ -133,14 +140,14 @@ textarea.now{min-height:72px}
 <dialog id="dlg"><form method="dialog" class="dlg">
   <h3 id="dlg-title">תא</h3>
   <p class="meta" id="dlg-meta"></p>
-  <p class="fl">מה יש שם עכשיו</p>
+  <p class="fl">📦 מה יש שם עכשיו</p>
   <textarea id="dlg-now" class="now" placeholder="מה דחפת לשם"></textarea>
-  <p class="fl">מה יישב שם בסוף</p>
+  <p class="fl">🎯 מה יישב שם בסוף</p>
   <textarea id="dlg-text" placeholder="היעד"></textarea>
   <div class="chips" id="dlg-chips"></div>
   <div class="row">
     <button value="cancel">ביטול</button>
-    <button value="save" class="pri">שמירה</button>
+    <button value="save" class="pri">✓ שמירה</button>
   </div>
 </form></dialog>
 <div class="status" id="status"></div>
@@ -162,11 +169,18 @@ function cellG(svg,x,y,w,h,id,title,sub){
   const r=el('rect',{x,y,width:w,height:h,rx:2,class:'b'}); r.dataset.id=id;
   g.appendChild(r);
   g.appendChild(el('line',{x1:x+w/2-13,y1:y+6,x2:x+w/2+13,y2:y+6,class:'hdl'}));
-  const t=el('text',{x:x+w/2,y:y+20,class:'lbl'}); t.textContent=title; g.appendChild(t);
-  const s=el('text',{x:x+w/2,y:y+34,class:'lbl sm'}); s.dataset.body=id;
-  s.dataset.x=x+w/2; s.dataset.y0=y+34; s.dataset.w=w-10;
-  s.dataset.max=Math.max(1,Math.floor((h-26)/12));
+  const t=el('text',{x:x+w/2,y:y+19,class:'lbl'}); t.textContent=title; g.appendChild(t);
+  const bx=x+w-9;
+  const s=el('text',{x:bx,y:y+34,class:'lbl sm'}); s.dataset.body=id;
+  s.dataset.x=bx; s.dataset.y0=y+34; s.dataset.w=w-18;
+  s.dataset.max=Math.max(1,Math.floor((h-28)/12));
   g.appendChild(s);
+  const pen=el('text',{x:x+11,y:y+h-7,class:'pen'}); pen.textContent='✎'; g.appendChild(pen);
+  const pg=el('g',{class:'pend'}); pg.style.display='none';
+  pg.appendChild(el('rect',{x:x+w-54,y:y+h-19,width:46,height:15,rx:7.5}));
+  const pt=el('text',{x:x+w-31,y:y+h-8}); pt.textContent='✓ לאשר'; pg.appendChild(pt);
+  pg.onclick=ev=>{ev.stopPropagation();confirmCell(id);};
+  g.appendChild(pg); g.dataset.pend=id;
   g.onclick=()=>openCell(id,title,sub);
   svg.appendChild(g); return g;
 }
@@ -299,32 +313,44 @@ function save(id,now,body){
 function toast(m){const s=document.getElementById('status');s.textContent=m;s.classList.add('on');
   clearTimeout(s._t);s._t=setTimeout(()=>s.classList.remove('on'),1800);}
 let VIEW='now';
-function wrapInto(t,txt,w,x,y0,max){
+function wrapInto(t,items,w,x,y0,max){
   while(t.firstChild)t.removeChild(t.firstChild);
-  if(!txt)return;
-  const cpl=Math.max(8,Math.floor(w/5));
-  const words=txt.split(/\s+/); const lines=[]; let cur='';
-  for(const wd of words){
-    if(!cur){cur=wd;}
-    else if((cur+' '+wd).length<=cpl){cur+=' '+wd;}
-    else{lines.push(cur);cur=wd; if(lines.length>=max)break;}
+  if(!items.length)return;
+  const cpl=Math.max(8,Math.floor(w/4.9));
+  const lines=[]; let more=false;
+  for(const it of items){
+    if(lines.length>=max){more=true;break;}
+    const words=it.split(/\s+/); let cur='';
+    for(const wd of words){
+      if(!cur){cur='• '+wd;}
+      else if((cur+' '+wd).length<=cpl){cur+=' '+wd;}
+      else{ if(lines.length>=max){more=true;break;} lines.push(cur); cur='\u00a0\u00a0'+wd; }
+    }
+    if(cur){ if(lines.length>=max){more=true;} else lines.push(cur); }
   }
-  if(cur&&lines.length<max)lines.push(cur);
-  const used=lines.join(' ').length;
-  if(used<txt.replace(/\s+/g,' ').length&&lines.length)
-    lines[lines.length-1]=lines[lines.length-1].slice(0,Math.max(3,cpl-1))+'…';
+  if(more&&lines.length) lines[lines.length-1]=lines[lines.length-1].slice(0,Math.max(4,cpl-2))+' …';
   lines.forEach((ln,i)=>{
     const ts=document.createElementNS('http://www.w3.org/2000/svg','tspan');
     ts.setAttribute('x',x); ts.setAttribute('y',y0+i*12); ts.textContent=ln;
     t.appendChild(ts);
   });
 }
+const MARK='⟨לאשר⟩';
+function confirmCell(id){
+  const v=data[id]||{};
+  save(id,(v.now||'').replace(MARK,'').trim(),(v.body||'').replace(MARK,'').trim());
+}
 function render(){
   document.querySelectorAll('text[data-body]').forEach(t=>{
-    const v=data[t.dataset.body]; const txt=(v&&v[VIEW])||'';
-    wrapInto(t,txt,+t.dataset.w,+t.dataset.x,+t.dataset.y0,+t.dataset.max);
-    const g=t.closest('.cell'); if(g){const r=g.querySelector('rect.b');
-      if(r) r.classList.toggle('filled',!!txt);}
+    const id=t.dataset.body, v=data[id]; let txt=(v&&v[VIEW])||'';
+    const pending=txt.indexOf(MARK)===0;
+    if(pending) txt=txt.replace(MARK,'').trim();
+    const items=txt.split(/\s*·\s*/).filter(Boolean);
+    wrapInto(t,items,+t.dataset.w,+t.dataset.x,+t.dataset.y0,+t.dataset.max);
+    const g=t.closest('.cell'); if(!g)return;
+    const r=g.querySelector('rect.b');
+    if(r){r.classList.toggle('filled',!!txt);r.classList.toggle('pending',pending);}
+    const pg=g.querySelector('.pend'); if(pg)pg.style.display=pending?'':'none';
   });
 }
 function load(){
