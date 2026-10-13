@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>מה יושב איפה — המטבח</title>
-<meta name="description" content="שלוש חזיתות המטבח לפי תוכניות הביצוע. נוגעים בכל מגירה וקובעים מה יושב בה.">
+<meta name="description" content="חמש חזיתות המטבח במידות של גיליון 10925. נוגעים בכל מגירה וקובעים מה יושב בה.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="אשל 57">
 <meta property="og:locale" content="he_IL">
 <meta property="og:title" content="מה יושב איפה — המטבח · אשל 57">
-<meta property="og:description" content="האי, הכיור והארונות הגבוהים. נוגעים בתא וקובעים מה נכנס.">
+<meta property="og:description" content="כל חזיתות המטבח. נוגעים בתא וקובעים מה נכנס.">
 <meta property="og:url" content="https://yaelavgil.github.io/kitchen-plan/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ctext y='26' font-size='26'%3E%F0%9F%8D%B3%3C/text%3E%3C/svg%3E">
 <meta name="theme-color" content="#f4f2ee" media="(prefers-color-scheme: light)">
@@ -21,7 +21,7 @@
 :root{
   --bg:#f4f2ee; --surface:#fffefb; --surface2:#ebe7df; --line:#dcd6cb; --line2:#c2baac;
   --ink:#24211c; --ink2:#665e53; --ink3:#968d80;
-  --blue:#3f5068; --blue2:#55688a; --accent:#8a5a2b;
+  --blue:#3f5068; --blue2:#55688a; --accent:#8a5a2b; --warn:#c8912f;
   --shadow:0 1px 2px rgba(40,34,26,.05),0 8px 22px rgba(40,34,26,.06);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
@@ -37,40 +37,50 @@ body{background:var(--bg);color:var(--ink);font:400 16px/1.55 Heebo,-apple-syste
 .wrap{max-width:1180px;margin:0 auto;padding:22px 14px 90px}
 .eyebrow{font-size:12.5px;color:var(--ink3);margin-bottom:6px}
 h1{font-family:"Frank Ruhl Libre",serif;font-weight:700;font-size:29px;line-height:1.15}
-.sub{color:var(--ink2);font-size:14.5px;margin-top:8px;max-width:60ch}
+.sub{color:var(--ink2);font-size:14.5px;margin-top:8px;max-width:62ch}
 h2{font-family:"Frank Ruhl Libre",serif;font-size:22px;font-weight:700;margin:34px 0 2px}
 .dims{font-size:13px;color:var(--ink3);margin-bottom:12px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:var(--shadow);overflow-x:auto}
 svg{display:block;width:100%;height:auto}
-#svg-island{min-width:1100px}
-#svg-sink{min-width:620px}
-#svg-tall{min-width:860px}
 .cell{cursor:pointer}
-.cell rect.b{fill:var(--blue);stroke:#1b1b1b;stroke-width:1.2;transition:fill .15s}
+.cell rect.b{fill:var(--blue);stroke:#1b1b1b;stroke-width:1.4;transition:fill .15s}
 .cell:hover rect.b{fill:var(--blue2)}
 .cell rect.b.filled{fill:#6c8299}
-.hdl{stroke:#c9b98f;stroke-width:3;stroke-linecap:round}
-.lbl{font:500 12px Heebo,sans-serif;fill:#fff;text-anchor:middle;pointer-events:none}
-.lbl.sm{font-size:10px;font-weight:400;fill:#e9e3d7;text-anchor:start}
-.pen{font-size:12px;fill:rgba(255,255,255,.5);cursor:pointer}
+.cell rect.b.pending{stroke:var(--warn);stroke-width:3}
+.hdl{stroke:#c9b98f;stroke-width:3.4;stroke-linecap:round}
+.lbl{font:600 13px Heebo,sans-serif;fill:#fff;text-anchor:middle;pointer-events:none}
+.lbl.sm{font:400 11.5px Heebo,sans-serif;fill:#e9e3d7;text-anchor:start;pointer-events:none}
+.pen{font-size:14px;fill:rgba(255,255,255,.5);pointer-events:none}
 .cell:hover .pen{fill:rgba(255,255,255,.95)}
-.pend rect{fill:#c8912f}
-.pend text{font:600 9.5px Heebo,sans-serif;fill:#fff;text-anchor:middle;pointer-events:none}
 .pend{cursor:pointer}
+.pend rect{fill:var(--warn)}
+.pend text{font:600 11px Heebo,sans-serif;fill:#fff;text-anchor:middle;pointer-events:none}
 .pend:hover rect{fill:#e0a53c}
-.cell rect.b.pending{stroke:#c8912f;stroke-width:2}
-.dim{font:400 9px Heebo,sans-serif;fill:var(--ink3);text-anchor:middle}
-.wall{fill:none;stroke:var(--ink3);stroke-width:1}
-.app{fill:#2a2a2a;stroke:#111;stroke-width:1.2}
-.cnt{fill:#efece6;stroke:#9c958a;stroke-width:1}
-.sheet-title{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:12.5px;color:var(--ink3);padding:0 4px 8px}
-dialog{border:none;border-radius:16px;padding:0;background:var(--surface);color:var(--ink);max-width:420px;width:92vw;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.dim{font:400 11px Heebo,sans-serif;fill:var(--ink3);text-anchor:middle}
+.note{font:400 11px Heebo,sans-serif;fill:var(--ink3);text-anchor:middle}
+.app{fill:#2a2a2a;stroke:#111;stroke-width:1.4}
+.applbl{font:500 12px Heebo,sans-serif;fill:#cfcac0;text-anchor:middle}
+.cnt{fill:#efece6;stroke:#9c958a;stroke-width:1.2}
+.toe{fill:#2b2b2b}
+.wall{fill:none;stroke:var(--ink3);stroke-width:1.2}
+.inner{stroke:rgba(255,255,255,.45);stroke-width:1.2;stroke-dasharray:6 4}
+.gap{fill:none;stroke:#9aa3ae;stroke-width:1.4;stroke-dasharray:6 4}
+.sheet-title{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:12.5px;color:var(--ink3);padding:8px 4px 0}
+.toggle{display:inline-flex;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:3px;gap:3px;margin:16px 0 4px}
+.toggle button{border:none;background:transparent;padding:8px 16px;border-radius:999px;font-size:13.5px;color:var(--ink2)}
+.toggle button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
+.zoom{display:flex;align-items:center;gap:5px;padding:0 4px 9px}
+.zoom button{padding:5px 12px;font-size:14px;border-radius:8px;line-height:1.1}
+.zoom span.pc{font-size:12.5px;color:var(--ink3);min-width:48px;text-align:center}
+dialog{border:none;border-radius:16px;padding:0;background:var(--surface);color:var(--ink);max-width:440px;width:92vw;box-shadow:0 20px 60px rgba(0,0,0,.35)}
 dialog::backdrop{background:rgba(0,0,0,.45)}
 .dlg{padding:18px}
 .dlg h3{font-size:18px;margin-bottom:2px}
-.dlg .meta{font-size:13px;color:var(--ink3);margin-bottom:14px}
-textarea{width:100%;min-height:96px;font:400 15px/1.5 Heebo,sans-serif;padding:11px;
+.dlg .meta{font-size:13px;color:var(--ink3);margin-bottom:12px}
+.fl{font-size:12.5px;color:var(--ink3);margin:12px 0 5px}
+textarea{width:100%;min-height:86px;font:400 15px/1.5 Heebo,sans-serif;padding:11px;
   border:1px solid var(--line2);border-radius:10px;background:var(--bg);color:var(--ink);resize:vertical}
+textarea.now{min-height:68px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
 .chip{background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:5px 11px;font-size:12.5px;color:var(--ink2);cursor:pointer}
 .chip:hover{border-color:var(--accent);color:var(--accent)}
@@ -82,57 +92,65 @@ button.pri{background:var(--accent);color:#fff;border-color:transparent}
   border:1px solid var(--line);border-radius:999px;padding:7px 16px;font-size:13px;color:var(--ink2);
   box-shadow:var(--shadow);opacity:0;transition:opacity .25s;pointer-events:none}
 .status.on{opacity:1}
-.toggle{display:inline-flex;background:var(--surface2);border:1px solid var(--line);border-radius:999px;padding:3px;gap:3px;margin:14px 0 4px}
-.toggle button{border:none;background:transparent;padding:7px 15px;border-radius:999px;font-size:13.5px;color:var(--ink2)}
-.toggle button.on{background:var(--surface);color:var(--ink);box-shadow:var(--shadow)}
-.zoom{display:flex;align-items:center;gap:4px;padding:0 4px 8px}
-.zoom button{padding:5px 11px;font-size:14px;border-radius:8px;line-height:1}
-.zoom span{font-size:12.5px;color:var(--ink3);min-width:46px;text-align:center}
-.zoom .sp{flex:1}
-.fl{font-size:12.5px;color:var(--ink3);margin:12px 0 5px}
-textarea.now{min-height:72px}
 .foot{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:12.5px;color:var(--ink3);line-height:1.8}
 </style>
 </head>
 <body>
 <div class="wrap">
 
-<p class="eyebrow">אשל 57 · מטבח · לפי אישור תקן 10925 (12.08.26)</p>
+<p class="eyebrow">אשל 57 · מטבח · גיליון 10925, אישור תקן 12.08.26</p>
 <h1>מה יושב איפה</h1>
-<p class="sub">שלוש החזיתות במידות האמיתיות מתוכניות הביצוע. נוגעים ב-✎ בכל מגירה כדי לערוך, ומסמנים ✓ לאשר על מה שעוד לא אומת. הכל נשמר לכולם מיד.</p>
+<p class="sub">כל חזיתות המטבח במידות מתוכניות הביצוע. נוגעים בתא כדי לערוך, ו-✓ לאשר מסיר סימון שעוד לא אומת. הכל נשמר לכולם מיד.</p>
 
 <div class="toggle" id="toggle">
   <button data-v="now" class="on">מה יש שם עכשיו</button>
   <button data-v="body">מה יישב שם בסוף</button>
 </div>
 
+<h2>קיר הכיור</h2>
+<p class="dims">חזית 2 · ארון חצי פינה 75 · מגירות 85 (כיריים מעל) · מגירות 100 · ארון כיור 97 · מדיח 61 · גובה 91</p>
+<div class="card">
+<div class="zoom" data-for="svg-sinkwall"><button data-z="out">−</button><span class="pc">100%</span><button data-z="in">+</button><button data-z="fit">התאם לרוחב</button></div>
+<svg viewBox="0 0 1900 420" id="svg-sinkwall"></svg>
+<div class="sheet-title"><span><b>חזית 2</b> · קיר הכיור והכיריים</span><span>מידות בס״מ</span></div>
+</div>
+
 <h2>האי</h2>
-<p class="dims">רוחב כולל 309.9 · שלוש יחידות 82 · 85 · 82 · גובה 91 · תשע מגירות</p>
+<p class="dims">חזית 3 · רוחב כולל 309.9 · שלוש יחידות 82 · 85 · 82 · תשע מגירות 15/30/30 · גובה 91 · עומק 64</p>
 <div class="card">
-<div class="zoom" data-for="svg-island"><button data-z="out">−</button><span>100%</span><button data-z="in">+</button><button data-z="fit">התאם לרוחב</button><span class="sp"></span></div>
-<svg viewBox="0 0 1130 390" id="svg-island"></svg>
-<div class="sheet-title"><span><b>חזית האי</b> · גיליון 10925/6</span><span>מידות בס״מ</span></div>
+<div class="zoom" data-for="svg-island"><button data-z="out">−</button><span class="pc">100%</span><button data-z="in">+</button><button data-z="fit">התאם לרוחב</button></div>
+<svg viewBox="0 0 1420 420" id="svg-island"></svg>
+<div class="sheet-title"><span><b>חזית 3</b> · חזית האי</span><span>מידות בס״מ</span></div>
 </div>
 
-<h2>חזית הכיור</h2>
-<p class="dims">רוחב 115 · שתי דלתות 54 · גובה 91 · מדפים פנימיים · לצד העמוד</p>
+<h2>קיר הבילד-אין</h2>
+<p class="dims">חזית 4 · עמודות 75 · 60 · 60 · נישת מקרר 97 · גובה כולל 263 · תנור 59 · מיקרו 38</p>
 <div class="card">
-<div class="zoom" data-for="svg-sink"><button data-z="out">−</button><span>100%</span><button data-z="in">+</button><button data-z="fit">התאם לרוחב</button><span class="sp"></span></div>
-<svg viewBox="0 0 640 350" id="svg-sink"></svg>
-<div class="sheet-title"><span><b>חזית הכיור</b> · גיליון 10925/5</span><span>מידות בס״מ</span></div>
+<div class="zoom" data-for="svg-tall"><button data-z="out">−</button><span class="pc">100%</span><button data-z="in">+</button><button data-z="fit">התאם לרוחב</button></div>
+<svg viewBox="0 0 1160 1060" id="svg-tall"></svg>
+<div class="sheet-title"><span><b>חזית 4</b> · התנור, המיקרו והמקרר</span><span>מידות בס״מ</span></div>
 </div>
 
-<h2>הארונות הגבוהים</h2>
-<p class="dims">רוחב 198.5 + נישת מקרר 97 · גובה 263 · תנור BOSCH HBG774 · מיקרו BFL520MB0</p>
+<h2>ארון שתי הדלתות</h2>
+<p class="dims">חזית 5 · רוחב 115 · שתי דלתות 54 · עומק 46.1 · גובה 91 · ליד העמוד החשוף</p>
 <div class="card">
-<div class="zoom" data-for="svg-tall"><button data-z="out">−</button><span>100%</span><button data-z="in">+</button><button data-z="fit">התאם לרוחב</button><span class="sp"></span></div>
-<svg viewBox="0 0 880 790" id="svg-tall"></svg>
-<div class="sheet-title"><span><b>קיר הבילד-אין</b> · גיליון 10925/2</span><span>מידות בס״מ</span></div>
+<div class="zoom" data-for="svg-side"><button data-z="out">−</button><span class="pc">100%</span><button data-z="in">+</button><button data-z="fit">התאם לרוחב</button></div>
+<svg viewBox="0 0 620 420" id="svg-side"></svg>
+<div class="sheet-title"><span><b>חזית 5</b> · ארון הדלתות</span><span>מידות בס״מ</span></div>
+</div>
+
+<h2>מתחת למדרגות</h2>
+<p class="dims">חזית 1 · ארון בקבוקים ותבלינים 28 · ארון חצי פינה 66 · גובה 91</p>
+<div class="card">
+<div class="zoom" data-for="svg-stair"><button data-z="out">−</button><span class="pc">100%</span><button data-z="in">+</button><button data-z="fit">התאם לרוחב</button></div>
+<svg viewBox="0 0 560 420" id="svg-stair"></svg>
+<div class="sheet-title"><span><b>חזית 1</b> · מתחת לגרם המדרגות</span><span>מידות בס״מ</span></div>
 </div>
 
 <p class="foot">
-המידות נלקחו מתוכניות הביצוע של פורמג׳ו, אישור תקן 10925 מ-12.08.26, והומרו ממילימטרים לסנטימטרים.<br>
-הגוון בשרטוט הוא האינדיגו שבוצע בפועל. מה שנכתב כאן נשמר מיד ונראה לכולם.
+כל המידות מגיליון 10925 של פורמג׳ו, אישור תקן 12.08.26 — במילימטרים בתוכנית, בסנטימטרים כאן.<br>
+במגירות התחתונות של קיר הבילד-אין התוכנית רושמת ״מגירה פנימית נמוכה + 2 גבוהות״, ובפועל יש שלוש מגירות בכל עמודה.<br>
+הגוון בשרטוט הוא האינדיגו שבוצע בפועל.
 </p>
 
 </div>
@@ -155,168 +173,224 @@ textarea.now{min-height:72px}
 <script>
 const DB='https://home-picks-47450-default-rtdb.europe-west1.firebasedatabase.app';
 const NODE=DB+'/kitchen/cells';
-let data={};
-
-const ISLAND={w:309.9,h:91,toe:12.5,units:[82,85,82],rows:[15,30,32],gap:1.8};
-const SINK={w:115,h:91,toe:12.5,doors:[54,54]};
-const TALL={w:198.5,fridge:97,h:263};
+const MARK='⟨לאשר⟩';
+let data={}, VIEW='now';
 
 function el(t,a){const e=document.createElementNS('http://www.w3.org/2000/svg',t);
   for(const k in a)e.setAttribute(k,a[k]);return e;}
+function txt(svg,x,y,s,cls){const t=el('text',{x,y,class:cls||'dim'});t.textContent=s;svg.appendChild(t);return t;}
 
-function cellG(svg,x,y,w,h,id,title,sub){
-  const g=el('g',{class:'cell'}); g.dataset.id=id; g.dataset.title=title;
-  const r=el('rect',{x,y,width:w,height:h,rx:2,class:'b'}); r.dataset.id=id;
-  g.appendChild(r);
-  g.appendChild(el('line',{x1:x+w/2-13,y1:y+6,x2:x+w/2+13,y2:y+6,class:'hdl'}));
-  const t=el('text',{x:x+w/2,y:y+19,class:'lbl'}); t.textContent=title; g.appendChild(t);
-  const bx=x+w-9;
-  const s=el('text',{x:bx,y:y+34,class:'lbl sm'}); s.dataset.body=id;
-  s.dataset.x=bx; s.dataset.y0=y+34; s.dataset.w=w-18;
-  s.dataset.max=Math.max(1,Math.floor((h-28)/12));
+function cell(svg,x,y,w,h,id,title,sub,opt){
+  opt=opt||{};
+  const g=el('g',{class:'cell'});
+  g.appendChild(el('rect',{x,y,width:w,height:h,rx:2,class:'b'}));
+  if(opt.handle!==false)
+    g.appendChild(el('line',{x1:x+w/2-16,y1:y+8,x2:x+w/2+16,y2:y+8,class:'hdl'}));
+  if(opt.inner)
+    g.appendChild(el('line',{x1:x+4,y1:y+opt.inner,x2:x+w-4,y2:y+opt.inner,class:'inner'}));
+  const t=el('text',{x:x+w/2,y:y+24,class:'lbl'}); t.textContent=title; g.appendChild(t);
+  const bx=x+w-10;
+  const s=el('text',{x:bx,y:y+40,class:'lbl sm'});
+  s.dataset.body=id; s.dataset.x=bx; s.dataset.y0=y+40; s.dataset.w=w-20;
+  s.dataset.max=Math.max(1,Math.floor((h-32)/13));
   g.appendChild(s);
-  const pen=el('text',{x:x+11,y:y+h-7,class:'pen'}); pen.textContent='✎'; g.appendChild(pen);
+  const pen=el('text',{x:x+13,y:y+h-9,class:'pen'}); pen.textContent='✎'; g.appendChild(pen);
   const pg=el('g',{class:'pend'}); pg.style.display='none';
-  pg.appendChild(el('rect',{x:x+w-54,y:y+h-19,width:46,height:15,rx:7.5}));
-  const pt=el('text',{x:x+w-31,y:y+h-8}); pt.textContent='✓ לאשר'; pg.appendChild(pt);
+  pg.appendChild(el('rect',{x:x+w-58,y:y+h-22,width:50,height:17,rx:8.5}));
+  const pt=el('text',{x:x+w-33,y:y+h-9.5}); pt.textContent='✓ לאשר'; pg.appendChild(pt);
   pg.onclick=ev=>{ev.stopPropagation();confirmCell(id);};
-  g.appendChild(pg); g.dataset.pend=id;
+  g.appendChild(pg);
   g.onclick=()=>openCell(id,title,sub);
   svg.appendChild(g); return g;
 }
-function dimText(svg,x,y,txt){const t=el('text',{x,y,class:'dim'});t.textContent=txt;svg.appendChild(t);}
+function appliance(svg,x,y,w,h,name,note){
+  svg.appendChild(el('rect',{x,y,width:w,height:h,class:'app'}));
+  const t=el('text',{x:x+w/2,y:y+h/2,class:'applbl'});t.textContent=name;svg.appendChild(t);
+  if(note){const n=el('text',{x:x+w/2,y:y+h/2+16,class:'applbl'});
+    n.setAttribute('font-size','10.5');n.textContent=note;svg.appendChild(n);}
+}
+
+function drawSinkWall(){
+  const svg=document.getElementById('svg-sinkwall'); svg.innerHTML='';
+  const S=0.40, OX=52, OY=50;
+  const H=755*S, TOE=125*S;
+  svg.appendChild(el('rect',{x:OX-6,y:OY-14,width:4180*S+12,height:13,class:'cnt'}));
+  let x=OX;
+  const put=(w,id,title,sub,rows)=>{
+    if(rows){ let y=OY;
+      rows.forEach((r,i)=>{ cell(svg,x,y,w*S-3,r[0]*S-3,id+'-'+(i+1),r[1],
+        sub+' · גובה '+(r[0]/10)+' ס״מ'); y+=r[0]*S; });
+    } else cell(svg,x,OY,w*S-3,H-3,id,title,sub);
+    txt(svg,x+w*S/2,OY+H+TOE+22,(w/10)+'');
+    x+=w*S;
+  };
+  put(750,'sinkw-corner','ארון חצי פינה','דלת · עומק פנימי 39.6 · גישה מהפינה');
+  const x0=x;
+  put(850,'sinkw-a',null,'יחידה 85 · מתחת לכיריים',
+      [[150,'מגירה עליונה'],[300,'מגירה אמצעית'],[300,'מגירה תחתונה']]);
+  txt(svg,x0+850*S/2,OY-24,'כיריים אינדוקציה','note');
+  put(1000,'sinkw-b',null,'יחידה 100',
+      [[150,'מגירה + סכו״ם'],[300,'מגירה אמצעית'],[300,'מגירה תחתונה']]);
+  put(970,'sinkw-sink','ארון הכיור','מערכת מים + טוחן · עגלת חומרי ניקוי · אוורור בסוקל');
+  appliance(svg,x,OY,610*S-3,H-3,'מדיח אינטגרלי','61 ס״מ');
+  txt(svg,x+610*S/2,OY+H+TOE+22,'61'); x+=610*S;
+  svg.appendChild(el('rect',{x:OX,y:OY+H,width:x-OX,height:TOE,class:'toe'}));
+  txt(svg,OX+(x-OX)/2,OY+H+TOE+44,'418 ארונות · קיר 599 · גובה 91');
+  txt(svg,OX-28,OY+H/2,'75.5');
+}
 
 function drawIsland(){
   const svg=document.getElementById('svg-island'); svg.innerHTML='';
-  const S=3.4, OX=34, OY=26;
-  const W=ISLAND.w*S, H=ISLAND.h*S;
-  svg.appendChild(el('rect',{x:OX-4,y:OY-7,width:W+8,height:6,class:'cnt'}));
-  let x=OX;
-  ISLAND.units.forEach((uw,ui)=>{
+  const S=0.40, OX=56, OY=50;
+  const units=[820,850,820], rows=[150,300,300];
+  const W=3099*S, H=755*S, TOE=125*S;
+  svg.appendChild(el('rect',{x:OX-8,y:OY-14,width:W+16,height:13,class:'cnt'}));
+  let x=OX+39*S;
+  units.forEach((uw,ui)=>{
     let y=OY;
-    ISLAND.rows.forEach((rh,ri)=>{
-      const id='island-'+(ui+1)+'-'+(ri+1);
-      const names=[['מגירה עליונה','מגירה + סכו״ם','מגירה עליונה'],['מגירה אמצעית','מגירה אמצעית','מגירה אמצעית'],['מגירה תחתונה','מגירה תחתונה','מגירה תחתונה']];
-      cellG(svg,x,y,uw*S-2,rh*S-2,id,names[ri][ui],`יחידה ${ui+1} · ${uw} ס״מ רוחב · ${rh} ס״מ גובה`);
+    rows.forEach((rh,ri)=>{
+      const names=[['מגירה עליונה','מגירה + סכו״ם','מגירה עליונה'],
+                   ['מגירה אמצעית','מגירה אמצעית','מגירה אמצעית'],
+                   ['מגירה תחתונה','מגירה תחתונה','מגירה תחתונה']];
+      cell(svg,x,y,uw*S-3,rh*S-3,'island-'+(ui+1)+'-'+(ri+1),names[ri][ui],
+           'יחידה '+(ui+1)+' · רוחב '+(uw/10)+' · גובה '+(rh/10)+' ס״מ · עומק 64');
       y+=rh*S;
     });
-    dimText(svg,x+uw*S/2,OY+H+14,uw+'');
+    txt(svg,x+uw*S/2,OY+H+TOE+22,(uw/10)+'');
     x+=uw*S;
   });
-  dimText(svg,OX+W/2,OY+H+30,'309.9 — רוחב כולל');
-  [15,30,32].forEach((v,i)=>{const yy=OY+(i===0?7.5:i===1?15+15:15+30+16)*S;dimText(svg,OX-18,yy,v+'');});
-  svg.appendChild(el('rect',{x:OX,y:OY+H,width:W,height:ISLAND.toe*S*0.5,fill:'#2b2b2b'}));
-}
-
-function drawSink(){
-  const svg=document.getElementById('svg-sink'); svg.innerHTML='';
-  const S=3.4, OX=120, OY=26;
-  const W=SINK.w*S, H=(SINK.h-SINK.toe)*S;
-  svg.appendChild(el('rect',{x:OX-4,y:OY-7,width:W+8,height:6,class:'cnt'}));
-  svg.appendChild(el('line',{x1:OX-40,y1:OY-16,x2:OX-40,y2:OY+H+26,class:'wall'}));
-  const pt=el('text',{x:OX-56,y:OY+H/2,class:'dim'});pt.textContent='עמוד';svg.appendChild(pt);
-  let x=OX;
-  SINK.doors.forEach((dw,i)=>{
-    cellG(svg,x,OY,dw*S-2,H,'sink-'+(i+1),'ארון '+(i+1),`דלת ${dw} ס״מ · מדפים פנימיים · גובה ${SINK.h-SINK.toe} ס״מ`);
-    dimText(svg,x+dw*S/2,OY+H+14,dw+'');
-    x+=dw*S;
+  svg.appendChild(el('rect',{x:OX,y:OY+H,width:W,height:TOE,class:'toe'}));
+  txt(svg,OX+W/2,OY+H+TOE+44,'309.9 — רוחב כולל · גובה 91 · עומק 64');
+  [[150,0],[300,150],[300,450]].forEach(function(p){
+    txt(svg,OX+26,OY+p[1]*S+p[0]*S/2+4,(p[0]/10)+'');
   });
-  dimText(svg,OX+W/2,OY+H+30,'115 — רוחב כולל');
-  svg.appendChild(el('rect',{x:OX,y:OY+H,width:W,height:SINK.toe*S*0.5,fill:'#2b2b2b'}));
 }
 
 function drawTall(){
   const svg=document.getElementById('svg-tall'); svg.innerHTML='';
-  const S=2.6, OX=30, OY=24;
-  const colW=[49.6,49.6,49.6,49.6];
-  const rows=[['top',80.4],['mid',56],['app',59],['drw',75.5]];
-  let x=OX;
-  colW.forEach((cw,ci)=>{
-    let y=OY;
-    rows.forEach(([kind,rh])=>{
-      const id='tall-'+(ci+1)+'-'+kind;
-      if(kind==='app'&&ci===1){
-        svg.appendChild(el('rect',{x,y,width:cw*S*2-2,height:rh*S-2,class:'app'}));
-        const t=el('text',{x:x+cw*S-1,y:y+rh*S/2,class:'lbl'});t.textContent='תנור';svg.appendChild(t);
-        const t2=el('text',{x:x+cw*S-1,y:y+rh*S/2+12,class:'lbl sm'});t2.textContent='BOSCH HBG774';svg.appendChild(t2);
-      } else if(kind==='app'&&ci===2){ /* skip, merged */ }
-      else if(kind==='app'&&ci===3){
-        svg.appendChild(el('rect',{x,y,width:cw*S-2,height:38*S,class:'app'}));
-        const t=el('text',{x:x+cw*S/2,y:y+19*S,class:'lbl'});t.textContent='מיקרו';svg.appendChild(t);
-        cellG(svg,x,y+38*S+2,cw*S-2,(rh-38)*S-4,'tall-4-pull','מדף נשלף','מתחת למיקרו · נשלף');
-      } else if(kind==='drw'){
-        const dh=[25,25,25.5]; let dy=y;
-        dh.forEach((hh,di)=>{
-          cellG(svg,x,dy,cw*S-2,hh*S-2,'tall-'+(ci+1)+'-drw'+(di+1),
-            ['מגירה עליונה','מגירה אמצעית','מגירה תחתונה'][di],
-            `עמודה ${ci+1} · גובה ${hh} ס״מ`);
-          dy+=hh*S;
-        });
-      } else {
-        const names={top:'תא עליון',mid:'תא אמצעי',app:ci===0?'נישת הקפה':'תא גבוה',drw:'מגירות'};
-        const subs={top:'גובה 80.4 ס״מ · מדף אחד',mid:'גובה 56 ס״מ',
-                    app:ci===0?'ליד התנור · מדף עומק 30 · לד עם מפסק':'גובה 59 ס״מ · לצד התנור',
-                    drw:'גובה 75.5 ס״מ'};
-        cellG(svg,x,y,cw*S-2,rh*S-2,id,names[kind],subs[kind]);
-      }
-      y+=rh*S;
+  const S=0.36, OX=62, OY=38;
+  const TOT=2630, PANEL=350, TOP=804, MID=590, DRW=755, TOE=125;
+  const yOf=function(mm){return OY+(TOT-mm)*S;};
+  const cols=[750,600,600];
+  svg.appendChild(el('rect',{x:OX,y:yOf(TOT),width:2955*S,height:PANEL*S,fill:'#30384a',stroke:'#1b1b1b'}));
+  txt(svg,OX+2955*S/2,yOf(TOT)+PANEL*S/2+4,'פאנל שלייפלאק למיזוג + חירוץ לאיוורור','applbl');
+  let x=OX+35*S;
+  const yTop=yOf(TOT-PANEL-TOP), yMid=yOf(TOE+DRW+MID), yDrw=yOf(TOE+DRW);
+  cols.forEach(function(cw,ci){
+    const w=cw*S-3, n=ci+1;
+    const nTop=ci===0?3:2, th=TOP/nTop;
+    for(let ti=0;ti<nTop;ti++)
+      cell(svg,x,yTop+ti*th*S,w,th*S-3,'tall-'+n+'-top'+(ti+1),
+        ['תא עליון','תא אמצעי','תא תחתון'][nTop===3?ti:(ti===0?0:2)],
+        'רוחב '+(cw/10)+' · גובה '+(Math.round(th)/10)+' ס״מ');
+    if(ci===0)
+      cell(svg,x,yMid,w,MID*S-3,'tall-1-nis','נישת הקפה',
+        'ליד התנור · מדף עומק 30 · לד עם מפסק · גובה 59 ס״מ');
+    else if(ci===1)
+      appliance(svg,x,yMid,w,MID*S-3,'תנור BOSCH','גובה 59 ס״מ');
+    else{
+      appliance(svg,x,yMid,w,380*S-3,'מיקרוגל','38 ס״מ');
+      cell(svg,x,yMid+380*S,w,(MID-380)*S-3,'tall-3-mdrw','מדף נשלף','מתחת למיקרו · גובה 21 ס״מ');
+    }
+    const dh=[250,250,255];
+    let dy=yDrw;
+    dh.forEach(function(hh,di){
+      cell(svg,x,dy,w,hh*S-3,'tall-'+n+'-drw'+(di+1),
+        ['מגירה עליונה','מגירה אמצעית','מגירה תחתונה'][di],
+        'רוחב '+(cw/10)+' · גובה '+(hh/10)+' ס״מ');
+      dy+=hh*S;
     });
+    txt(svg,x+w/2,yOf(0)+24,(cw/10)+'');
     x+=cw*S;
   });
-  const fx=OX+4*49.6*S+6;
-  cellG(svg,fx,OY,97*S,80.4*S-2,'tall-5-top','קלאפה מעל המקרר',
-        'רוחב 97 · גובה 80.4 ס״מ · ממשיכה את התא העליון');
-  const gy=OY+80.4*S, gh=15*S;
-  svg.appendChild(el('rect',{x:fx,y:gy,width:97*S,height:gh,fill:'none',
-    stroke:'#9aa3ae','stroke-width':1,'stroke-dasharray':'4 3'}));
-  const gt=el('text',{x:fx+97*S/2,y:gy+gh/2+4,class:'lbl sm'});
-  gt.textContent='רווח 15 ס״מ';gt.setAttribute('fill','#6b7280');svg.appendChild(gt);
-  const fy=gy+gh, fh=175.5*S;
-  svg.appendChild(el('rect',{x:fx,y:fy,width:97*S,height:fh,class:'app'}));
-  const ft=el('text',{x:fx+97*S/2,y:fy+fh/2,class:'lbl'});ft.textContent='מקרר LG';svg.appendChild(ft);
-  const ft2=el('text',{x:fx+97*S/2,y:fy+fh/2+12,class:'lbl sm'});ft2.textContent='נישה 97 רוחב · 175.5 גובה';svg.appendChild(ft2);
-  dimText(svg,OX+4*49.6*S/2,OY+271*S+2,'198.5');
-  dimText(svg,fx+97*S/2,OY+271*S+2,'97');
+  const fx=OX+1985*S+8, fw=970*S;
+  cell(svg,fx,yOf(TOT-PANEL),fw,365*S-3,'tall-klapa','קלאפה מעל המקרר',
+       'שוכב עליון פריק · רוחב 97 · גובה 36.5 ס״מ');
+  const fy=yOf(1915);
+  svg.appendChild(el('rect',{x:fx,y:fy,width:fw,height:150*S,class:'gap'}));
+  txt(svg,fx+fw/2,fy+150*S/2+4,'רווח 15 ס״מ');
+  appliance(svg,fx,fy+150*S,fw,1915*S-150*S,'מקרר LG','נישה 97 × 191.5 · עומק 61');
+  txt(svg,fx+fw/2,yOf(0)+24,'97');
+  svg.appendChild(el('rect',{x:OX,y:yOf(TOE),width:1985*S,height:TOE*S,class:'toe'}));
+  txt(svg,OX+2955*S/2,yOf(0)+46,'198.5 ארונות + 97 נישת מקרר · גובה כולל 263');
+  [[PANEL,TOT],[TOP,TOT-PANEL],[MID,TOE+DRW+MID],[DRW,TOE+DRW]].forEach(function(p){
+    txt(svg,OX-30,yOf(p[1])+p[0]*S/2+4,(p[0]/10)+'');
+  });
+}
+
+function drawSide(){
+  const svg=document.getElementById('svg-side'); svg.innerHTML='';
+  const S=0.40, OX=86, OY=50;
+  const H=755*S, TOE=125*S;
+  svg.appendChild(el('rect',{x:OX-8,y:OY-14,width:1150*S+16,height:13,class:'cnt'}));
+  svg.appendChild(el('line',{x1:OX-36,y1:OY-20,x2:OX-36,y2:OY+H+TOE+10,class:'wall'}));
+  txt(svg,OX-52,OY+H/2,'עמוד');
+  let x=OX;
+  [540,540].forEach(function(dw,i){
+    cell(svg,x,OY,dw*S-3,H-3,'side-'+(i+1),'ארון '+(i+1),
+         'דלת '+(dw/10)+' ס״מ · מדפים פנימיים · עומק 46.1 · גובה 75.5');
+    txt(svg,x+dw*S/2,OY+H+TOE+22,(dw/10)+''); x+=dw*S;
+  });
+  svg.appendChild(el('rect',{x:OX,y:OY+H,width:1150*S,height:TOE,class:'toe'}));
+  txt(svg,OX+1150*S/2,OY+H+TOE+44,'115 — רוחב כולל · גובה 91');
+}
+
+function drawStair(){
+  const svg=document.getElementById('svg-stair'); svg.innerHTML='';
+  const S=0.40, OX=66, OY=50;
+  const H=755*S, TOE=125*S;
+  svg.appendChild(el('rect',{x:OX-8,y:OY-14,width:990*S+16,height:13,class:'cnt'}));
+  let x=OX;
+  cell(svg,x,OY,280*S-3,H-3,'stair-bottles','בקבוקים ותבלינים','רוחב 28 · ידית 9.6 · גובה 75.5');
+  txt(svg,x+280*S/2,OY+H+TOE+22,'28'); x+=280*S;
+  cell(svg,x,OY,660*S-3,H-3,'stair-corner','ארון חצי פינה','רוחב 66 · גישה מהפינה · גובה 75.5');
+  txt(svg,x+660*S/2,OY+H+TOE+22,'66'); x+=660*S;
+  svg.appendChild(el('rect',{x:OX,y:OY+H,width:990*S,height:TOE,class:'toe'}));
+  txt(svg,OX+990*S/2,OY+H+TOE+44,'99 — רוחב הקיר · גובה 91');
 }
 
 const SUGGEST={
-  island:['סירים וכלי בישול','מכסים','סכו״ם','כלי הגשה','קופסאות אחסון','תבלינים','מגבות וסינרים','כלי אפייה'],
-  sink:['חומרי ניקוי','שקיות אשפה','מסננים וקערות','כלי ניקיון','פח מיון'],
-  tall:['מלאי יבש','כלי אפייה','תבניות בעמידה','ספלים','קפה ותה','חטיפים','צלחות','עונתי']
+  island:['סירים','מחבתות','קערות ערבוב','סכו״ם','כלי הגשה','כלי אפייה','תבלינים','ירקות שורש'],
+  sinkw:['חומרי ניקוי','שקיות אשפה','פח מיון','כלי ניקיון','מסננים','סירים','כלי בישול'],
+  tall:['מזווה','אפייה','קפה','חטיפים','דגני בוקר','שימורים','עונתי','חד פעמי'],
+  side:['חד פעמי','כלי הגשה','עודפים','מפות ומפיות'],
+  stair:['שמנים','חומץ','בקבוקים','תבלינים']
 };
 function openCell(id,title,sub){
   const d=document.getElementById('dlg');
   document.getElementById('dlg-title').textContent=title;
   document.getElementById('dlg-meta').textContent=sub||'';
-  const ta=document.getElementById('dlg-text');
-  const na=document.getElementById('dlg-now');
-  ta.value=(data[id]&&data[id].body)||'';
-  na.value=(data[id]&&data[id].now)||'';
+  const ta=document.getElementById('dlg-text'), na=document.getElementById('dlg-now');
+  ta.value=(data[id]&&data[id].body)||''; na.value=(data[id]&&data[id].now)||'';
   const box=document.getElementById('dlg-chips'); box.innerHTML='';
   const fam=id.split('-')[0];
-  (SUGGEST[fam]||[]).forEach(s=>{
+  (SUGGEST[fam]||[]).forEach(function(s){
     const c=document.createElement('span'); c.className='chip'; c.textContent=s;
-    c.onclick=()=>{ta.value=ta.value?ta.value+' · '+s:s;};
+    c.onclick=function(){ta.value=ta.value?ta.value+' · '+s:s;};
     box.appendChild(c);
   });
   d.returnValue='';
-  d.onclose=()=>{ if(d.returnValue==='save') save(id,na.value.trim(),ta.value.trim()); };
+  d.onclose=function(){ if(d.returnValue==='save') save(id,na.value.trim(),ta.value.trim()); };
   d.showModal();
 }
+function confirmCell(id){
+  const v=data[id]||{};
+  save(id,(v.now||'').replace(MARK,'').trim(),(v.body||'').replace(MARK,'').trim());
+}
 function save(id,now,body){
-  data[id]=Object.assign({},data[id],{now,body,at:Date.now()});
+  data[id]=Object.assign({},data[id],{now:now,body:body,at:Date.now()});
   render();
   fetch(NODE+'/'+id+'.json',{method:'PATCH',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({now,body,at:Date.now()})})
-    .then(()=>toast('נשמר')).catch(()=>toast('נשמר מקומית — אין חיבור'));
+    body:JSON.stringify({now:now,body:body,at:Date.now()})})
+    .then(function(){toast('נשמר');}).catch(function(){toast('נשמר מקומית — אין חיבור');});
 }
 function toast(m){const s=document.getElementById('status');s.textContent=m;s.classList.add('on');
-  clearTimeout(s._t);s._t=setTimeout(()=>s.classList.remove('on'),1800);}
-let VIEW='now';
+  clearTimeout(s._t);s._t=setTimeout(function(){s.classList.remove('on');},1800);}
+
 function wrapInto(t,items,w,x,y0,max){
   while(t.firstChild)t.removeChild(t.firstChild);
   if(!items.length)return;
-  const cpl=Math.max(8,Math.floor(w/4.9));
+  const cpl=Math.max(8,Math.floor(w/5.6));
   const lines=[]; let more=false;
   for(const it of items){
     if(lines.length>=max){more=true;break;}
@@ -324,38 +398,32 @@ function wrapInto(t,items,w,x,y0,max){
     for(const wd of words){
       if(!cur){cur='• '+wd;}
       else if((cur+' '+wd).length<=cpl){cur+=' '+wd;}
-      else{ if(lines.length>=max){more=true;break;} lines.push(cur); cur='\u00a0\u00a0'+wd; }
+      else{ if(lines.length>=max){more=true;break;} lines.push(cur); cur='  '+wd; }
     }
-    if(cur){ if(lines.length>=max){more=true;} else lines.push(cur); }
+    if(cur){ if(lines.length>=max)more=true; else lines.push(cur); }
   }
   if(more&&lines.length) lines[lines.length-1]=lines[lines.length-1].slice(0,Math.max(4,cpl-2))+' …';
-  lines.forEach((ln,i)=>{
+  lines.forEach(function(ln,i){
     const ts=document.createElementNS('http://www.w3.org/2000/svg','tspan');
-    ts.setAttribute('x',x); ts.setAttribute('y',y0+i*12); ts.textContent=ln;
+    ts.setAttribute('x',x); ts.setAttribute('y',y0+i*13); ts.textContent=ln;
     t.appendChild(ts);
   });
 }
-const MARK='⟨לאשר⟩';
-function confirmCell(id){
-  const v=data[id]||{};
-  save(id,(v.now||'').replace(MARK,'').trim(),(v.body||'').replace(MARK,'').trim());
-}
 function render(){
-  document.querySelectorAll('text[data-body]').forEach(t=>{
-    const id=t.dataset.body, v=data[id]; let txt=(v&&v[VIEW])||'';
-    const pending=txt.indexOf(MARK)===0;
-    if(pending) txt=txt.replace(MARK,'').trim();
-    const items=txt.split(/\s*·\s*/).filter(Boolean);
-    wrapInto(t,items,+t.dataset.w,+t.dataset.x,+t.dataset.y0,+t.dataset.max);
+  document.querySelectorAll('text[data-body]').forEach(function(t){
+    const id=t.dataset.body, v=data[id]; let s=(v&&v[VIEW])||'';
+    const pending=s.indexOf(MARK)===0;
+    if(pending) s=s.replace(MARK,'').trim();
+    wrapInto(t,s.split(/\s*·\s*/).filter(Boolean),+t.dataset.w,+t.dataset.x,+t.dataset.y0,+t.dataset.max);
     const g=t.closest('.cell'); if(!g)return;
     const r=g.querySelector('rect.b');
-    if(r){r.classList.toggle('filled',!!txt);r.classList.toggle('pending',pending);}
+    if(r){r.classList.toggle('filled',!!s);r.classList.toggle('pending',pending);}
     const pg=g.querySelector('.pend'); if(pg)pg.style.display=pending?'':'none';
   });
 }
-function load(){
-  fetch(NODE+'.json').then(r=>r.json()).then(d=>{data=d||{};render();}).catch(()=>{});
-}
+function load(){fetch(NODE+'.json').then(function(r){return r.json();})
+  .then(function(d){data=d||{};render();}).catch(function(){});}
+
 const ZB={},ZV={};
 function zoom(id,v){
   const svg=document.getElementById(id), card=svg.parentElement;
@@ -364,22 +432,23 @@ function zoom(id,v){
   let z=ZV[id]===undefined?1:ZV[id];
   if(v==='in')z=Math.min(3,z+0.25); else if(v==='out')z=Math.max(0.3,z-0.25); else z=fit;
   ZV[id]=z;
-  svg.style.minWidth='0'; svg.style.width=Math.round(ZB[id]*z)+'px';
-  const c=document.querySelector('.zoom[data-for="'+id+'"] span');
+  svg.style.width=Math.round(ZB[id]*z)+'px';
+  const c=document.querySelector('.zoom[data-for="'+id+'"] span.pc');
   if(c)c.textContent=Math.round(z*100)+'%';
 }
-document.querySelectorAll('.zoom').forEach(z=>{
-  z.onclick=e=>{const b=e.target.closest('button'); if(b)zoom(z.dataset.for,b.dataset.z);};
+document.querySelectorAll('.zoom').forEach(function(z){
+  z.onclick=function(e){const b=e.target.closest('button'); if(b)zoom(z.dataset.for,b.dataset.z);};
 });
-document.getElementById('toggle').onclick=e=>{
+document.getElementById('toggle').onclick=function(e){
   const b=e.target.closest('button'); if(!b)return;
   VIEW=b.dataset.v;
-  [...e.currentTarget.children].forEach(c=>c.classList.toggle('on',c===b));
+  [].slice.call(e.currentTarget.children).forEach(function(c){c.classList.toggle('on',c===b);});
   render();
 };
-drawIsland(); drawSink(); drawTall(); load();
+
+drawSinkWall(); drawIsland(); drawTall(); drawSide(); drawStair(); load();
 setInterval(load,6000);
-document.addEventListener('visibilitychange',()=>{if(!document.hidden)load();});
+document.addEventListener('visibilitychange',function(){if(!document.hidden)load();});
 </script>
 </body>
 </html>
